@@ -51,10 +51,10 @@ If oHTTP.status = 200 Then
 			Next
 		End If
 	Next
-	
+	WScript.Quit(0) ' SUCCESS
 	
 Else 
-	WScript.Quit(2) ' ERROR obtaining xml file
+	WScript.Quit(1) ' ERROR obtaining xml file
 End If
 
 
