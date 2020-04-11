@@ -1,4 +1,5 @@
 Option Explicit
+On Error Resume Next 
 Const ns = "xmlns:gesmes='http://www.gesmes.org/xml/2002-08-01' xmlns='http://www.ecb.int/vocabulary/2002-08-01/eurofxref'" ' XML namespace
 Dim oFSO,oWSH,oXML,oHTTP,oFD
 Dim n_ChildNodes,n_ChildNode,a_Attributes,a_Attribute,strDate
@@ -26,6 +27,7 @@ If oHTTP.status = 200 Then
 		If n_ChildNode.attributes.length > 1 Then ' Nodes with 2 attributes(currency,rate) hold the currency rates
 			Set a_Attributes = n_ChildNode.attributes
 			For Each a_Attribute In a_Attributes
+				If a_Attribute.baseName = "currency" Then 
 				Select Case a_Attribute.text
 				    ' Copy and paste the Case for each currency you want and change the Case expression
 					Case "NOK"
@@ -48,13 +50,15 @@ If oHTTP.status = 200 Then
 						vbTab & "1"
 						
 				End Select
+				End If 
 			Next
 		End If
 	Next
-	WScript.Quit(0) ' SUCCESS
+	oFD.Close
+	WScript.Quit(0)
 	
 Else 
-	WScript.Quit(1) ' ERROR obtaining xml file
+	WScript.Quit(2) ' ERROR obtaining xml file
 End If
 
 
