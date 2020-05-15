@@ -12,3 +12,6 @@
  
  Output files are named like this: YYYYMMDD.txt e.g 20200521.txt
  This file would contain exchange rates valid for 21st May 2020
+ 
+ Output files are saved in C:\ExRate directory
+ Log is in C:\ExRate\log.txt
